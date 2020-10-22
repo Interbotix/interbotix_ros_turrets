@@ -1,0 +1,12 @@
+# This file must be placed in /usr/share/applications
+# It provides the Desktop shortcut to launch the X-Series Turret Controller
+
+[Desktop Entry]
+Name=Interbotix X-Series Turret
+Comment=Interbotix X-Series Turret Control
+Exec="/home/pibot/interbotix_ws/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/rpi4/xsturret_rpi4_launch.sh"
+Icon=/home/pibot/interbotix_ws/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/xsturret.png
+Terminal=false
+Type=Application
+Categories=ROS;
+StartupNotify=true

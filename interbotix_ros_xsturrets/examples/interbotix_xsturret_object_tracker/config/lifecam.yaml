@@ -1,0 +1,20 @@
+image_width: 320
+image_height: 240
+camera_name: lifecam
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [326.1091347870814, 0, 167.9196868110746, 0, 324.6882954308338, 131.7891110430104, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [0.0154442392421564, 0.0396491257319873, 0.002045758863903521, 0.006435071319775895, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [329.4978637695312, 0, 169.4333503823545, 0, 0, 329.7273254394531, 132.0564717194384, 0, 0, 0, 1, 0]

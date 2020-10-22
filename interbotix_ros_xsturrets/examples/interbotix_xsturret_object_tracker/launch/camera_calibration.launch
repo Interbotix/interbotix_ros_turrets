@@ -1,0 +1,23 @@
+<launch>
+
+  <node
+    name="camera"
+    pkg="usb_cam"
+    type="usb_cam_node"
+    output="screen">
+    <param name="video_device"                    value="/dev/lifecam"/>
+    <param name="image_width"                     value="320"/>
+    <param name="image_height"                    value="240"/>
+    <param name="pixel_format"                    value="yuyv"/>
+    <param name="io_method"                       value="mmap"/>
+    <param name="framerate"                       value="30"/>
+    <param name="contrast"                        value="100"/>
+    <param name="brightness"                      value="100"/>
+    <param name="saturation"                      value="100"/>
+    <param name="sharpness"                       value="100"/>
+    <param name="autofocus"                       value="true"/>
+    <param name="focus"                           value="51"/>
+    <param name="camera_name"                     value="lifecam"/>
+  </node>
+
+</launch>

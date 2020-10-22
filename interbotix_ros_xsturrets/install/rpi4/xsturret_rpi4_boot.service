@@ -1,0 +1,15 @@
+# This service auto-launches the xsturret_joy.launch file when the computer boots.
+# This file should be copied to /lib/systemd/system. Afterwards, type...
+# 'sudo systemctl daemon-reload' followed by 'sudo systemctl enable xsturret_rpi4_boot.service'.
+
+[Unit]
+Description=Start X-Series Turret Joystick Control
+
+[Service]
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/pibot/.Xauthority
+ExecStart=/home/pibot/interbotix_ws/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/rpi4/xsturret_rpi4_launch.sh
+Restart=on-failure
+
+[Install]
+WantedBy=graphical.target

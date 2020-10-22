@@ -1,0 +1,60 @@
+#!/usr/bin/env python
+
+import rospy
+from sensor_msgs.msg import JointState
+from interbotix_xs_sdk.msg import JointGroupCommand
+from interbotix_xs_sdk.srv import RobotInfo
+from apriltag_ros.msg import AprilTagDetectionArray
+
+### Class that performs object tracking based on AR tags
+class ArTagTracker(object):
+
+    ### @brief Initialization of the ArTagTracker class; sets up the components necessary to do object tracking
+    def __init__(self):
+        self.joint_states = None                                                                                        # Current states of the 'pan' and 'tilt' joints
+        rospy.wait_for_service("get_robot_info")                                                                        # Wait for the 'get_robot_info' ROS Servie to become available
+        self.srv_robot_info = rospy.ServiceProxy("get_robot_info", RobotInfo)                                           # ROS Service used to get joint limit information
+        self.pub_cmds = rospy.Publisher("commands/joint_group", JointGroupCommand, queue_size=1)                        # ROS Publisher to publish commands to the 'pan' and 'tilt' joints
+        self.sub_joint_states = rospy.Subscriber("joint_states", JointState, self.joint_state_cb)                       # ROS Subscriber to get the latest joint states
+        while (self.joint_states is None): pass                                                                         # Wait until the node gets the latest joint states
+        self.joint_commands = JointGroupCommand("turret", list(self.joint_states.position))                             # Set initial joint commands to the current joint positions                                                           # Wait until an initial joint state message is recieved
+        self.robot_info = self.srv_robot_info("group", "turret")                                                        # Call the RobotInfo Service
+        self.sub_ar = rospy.Subscriber("tag_detections", AprilTagDetectionArray, self.artag_cb)                         # ROS Subscriber to get tag poses w.r.t. the camera frame
+
+    ### @brief ROS Subscriber callback function to get updated joint states
+    ### @param msg - updated JointState message
+    def joint_state_cb(self, msg):
+        self.joint_states = msg
+
+    ### @brief ROS Subscriber callback function to get the ar tag pose
+    ### @param msg - updated AprilTagDetectionArray message
+    def artag_cb(self, msg):
+
+        if (len(msg.detections) == 0):
+            return
+
+        x = msg.detections[0].pose.pose.pose.position.x
+        y = msg.detections[0].pose.pose.pose.position.y
+
+        if (x > 0.03):
+            self.joint_commands.cmd[0] -= 0.03
+            if (self.joint_commands.cmd[0] < self.robot_info.joint_lower_limits[0]):
+                self.joint_commands.cmd[0] = self.robot_info.joint_lower_limits[0]
+        elif (x < -0.03):
+            self.joint_commands.cmd[0] += 0.03
+            if (self.joint_commands.cmd[0] > self.robot_info.joint_upper_limits[0]):
+                self.joint_commands.cmd[0] = self.robot_info.joint_upper_limits[0]
+        if (y < -0.03):
+            self.joint_commands.cmd[1] -= 0.03
+            if (self.joint_commands.cmd[1] < self.robot_info.joint_lower_limits[1]):
+                self.joint_commands.cmd[1] = self.robot_info.joint_lower_limits[1]
+        elif (y > 0.03):
+            self.joint_commands.cmd[1] += 0.03
+            if (self.joint_commands.cmd[1] > self.robot_info.joint_upper_limits[1]):
+                self.joint_commands.cmd[1] = self.robot_info.joint_upper_limits[1]
+        self.pub_cmds.publish(self.joint_commands)
+
+if __name__ == '__main__':
+    rospy.init_node('xsturret_ar_tracker')
+    ar_tag_tracker = ArTagTracker()
+    rospy.spin()
