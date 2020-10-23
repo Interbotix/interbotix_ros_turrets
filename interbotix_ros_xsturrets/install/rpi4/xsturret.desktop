@@ -5,7 +5,7 @@
 Name=Interbotix X-Series Turret
 Comment=Interbotix X-Series Turret Control
 Exec="/home/pibot/interbotix_ws/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/rpi4/xsturret_rpi4_launch.sh"
-Icon=/home/pibot/interbotix_ws/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/xsturret.png
+Icon=/home/pibot/interbotix_ws/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/rpi4/xsturret.png
 Terminal=false
 Type=Application
 Categories=ROS;
