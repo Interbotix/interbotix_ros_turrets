@@ -10,7 +10,7 @@ else
   exit 1
 fi
 
-read -p "What is your robot model? (ex. wxxmt): " ROBOT_MODEL
+read -p "What is your robot model? (ex. wxxmd): " ROBOT_MODEL
 read -p "Run the Joystick ROS package at system boot? " resp
 if [[ $resp == [yY] || $resp == [yY][eE][sS] ]]; then
   run_joy_at_boot=true
@@ -102,9 +102,12 @@ else
   echo "Environment variables already set!"
 fi
 
-# Step 5: Configure 'run at startup' feature
+# Step 5: Add desktop shortcut
+cd $INTERBOTIX_WS/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/rpi4/
+sudo cp xsturret.desktop /usr/share/applications/
+
+# Step 6: Configure 'run at startup' feature
 if [ "$run_joy_at_boot" = true ]; then
-  cd $INTERBOTIX_WS/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/rpi4/
   touch xsturret_rpi4_launch.sh
   echo -e "#! /bin/bash
 
@@ -113,7 +116,7 @@ if [ "$run_joy_at_boot" = true ]; then
 # and launches the xsturret_simple_interface launch file.
 
 source /opt/ros/$ROS_NAME/setup.bash
-source $INTERBOTIX_WS/interbotix_ws/devel/setup.bash
+source $INTERBOTIX_WS/devel/setup.bash
 
 # if the xs_sdk node is already running...
 if pgrep -x \"roslaunch\" > /dev/null; then
