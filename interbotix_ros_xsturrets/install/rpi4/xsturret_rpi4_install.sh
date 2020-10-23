@@ -106,6 +106,24 @@ fi
 # Step 5: Configure 'run at startup' feature
 if [ "$run_joy_at_boot" = true ]; then
   cd $INTERBOTIX_WS/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/rpi4/
+  touch xsturret_rpi4_launch.sh
+  echo -e "#! /bin/bash
+
+  # This script is called by the xsturret_rpi4_boot.service file when
+  # the Raspberry Pi boots. It just sources the ROS related workspaces
+  # and launches the xsturret_simple_interface launch file.
+
+  source /opt/ros/$ROS_NAME/setup.bash
+  source $INTERBOTIX_WS/interbotix_ws/devel/setup.bash
+
+  # if the xs_sdk node is already running...
+  if pgrep -x \"roslaunch\" > /dev/null; then
+    echo \"Launching turret GUI node only\"
+    rosrun interbotix_xsturret_simple_interface xsturret_simple_interface_gui __ns:=$ROBOT_MODEL
+  else
+    echo \"Launching...\"
+    roslaunch interbotix_xsturret_simple_interface xsturret_simple_interface.launch use_rviz:=false robot_model:=$ROBOT_MODEL
+  fi" > xsturret_rpi4_launch.sh
   chmod +x xsturret_rpi4_launch.sh
   sudo cp xsturret_rpi4_boot.service /lib/systemd/system/
   sudo systemctl daemon-reload
