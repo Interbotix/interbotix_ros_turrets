@@ -106,6 +106,7 @@ fi
 cd $INTERBOTIX_WS/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/rpi4/
 sudo cp xsturret.desktop /usr/share/applications/
 cp xsturret.desktop ~/Desktop
+chmod +x ~/Desktop/xsturret.desktop
 
 # Step 6: Configure 'run at startup' feature
 if [ "$run_joy_at_boot" = true ]; then
