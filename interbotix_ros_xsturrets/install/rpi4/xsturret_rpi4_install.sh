@@ -105,6 +105,7 @@ fi
 # Step 5: Add desktop shortcut
 cd $INTERBOTIX_WS/src/interbotix_ros_turrets/interbotix_ros_xsturrets/install/rpi4/
 sudo cp xsturret.desktop /usr/share/applications/
+cp xsturret.desktop ~/Desktop
 
 # Step 6: Configure 'run at startup' feature
 if [ "$run_joy_at_boot" = true ]; then
