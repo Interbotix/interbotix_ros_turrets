@@ -16,6 +16,6 @@ roslaunch interbotix_xsturret_control xsturret_control.launch robot_model:=pxxls
 ```
 In another terminal, navigate to this directory and type...
 ```
-python turret_time_profile_control.py
+python turret_time_profile_control.py        # python3 turret_time_profile_control.py if using ROS Noetic
 ```
 You should observe the robot navigate through a series of motions - sometimes moving both joints and sometimes just moving one. The other scripts work in a similar fashion. To make things easier, they are also documented to give you a better understanding of how the code works.
