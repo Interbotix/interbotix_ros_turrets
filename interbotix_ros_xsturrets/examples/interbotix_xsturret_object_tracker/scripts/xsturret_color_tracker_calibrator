@@ -117,7 +117,7 @@ class ColorTrackerGUI(QWidget):
 
         # Create and Display the Overlay Image (show the entire image overlaid with 'yellow' points that define the boundary of interest and a 'red' point that defines the centroid within that boundary)
         cv_overlay = hsv_image.copy()
-        _, contours, _ = cv2.findContours(cv_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(cv_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)[-2:]
         # if a 'contour' (fancy word for boundary) was found...
         if len(contours) > 0:
             # return the largest contour from all the ones found
