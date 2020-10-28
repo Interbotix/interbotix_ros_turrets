@@ -570,7 +570,7 @@ class TurretControlGUI(QWidget):
     def create_slider(self):
         slider = QSlider(Qt.Horizontal)
         slider.setRange(0, RANGE)
-        slider.setValue(RANGE/2)
+        slider.setValue(int(RANGE/2))
         slider.setFixedWidth(450)
         return slider
 
