@@ -22,7 +22,7 @@ from python_qt_binding.QtGui import QColor
 from python_qt_binding.QtCore import Qt
 from python_qt_binding.QtCore import QTimer
 from python_qt_binding.QtWidgets import *
-from joystick import JoystickButton
+from interbotix_xsturret_simple_interface.joystick import JoystickButton
 
 RANGE = 10000               # There are arbitrariliy 10,000 'steps' from one end of a slider bar to the other
 
