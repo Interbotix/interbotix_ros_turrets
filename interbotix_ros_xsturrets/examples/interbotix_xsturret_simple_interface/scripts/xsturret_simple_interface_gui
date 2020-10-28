@@ -1047,7 +1047,7 @@ class TurretControlGUI(QWidget):
         info['display'].setText(format % value)
 
         # if the 'Pan' or 'Tilt' positions are being adjusted...
-        if (name is not "velocity"):
+        if (name != "velocity"):
             self.joint_commands.cmd[info['joint']] = self.deg2rad(value)
 
             # if the user is currently using a slider, then update the joystick crosshair
