@@ -33,7 +33,7 @@ class ColorTracker(object):
             self.pub_images = rospy.Publisher("contour_detections", Image, queue_size=5)                                # ROS Publisher to publish images with the detected contours
         self.sub_joint_states = rospy.Subscriber("joint_states", JointState, self.joint_state_cb)                       # ROS Subscriber to get the latest joint states
         while (self.joint_states is None): pass                                                                         # Wait until the node gets the latest joint states
-        self.joint_commands = JointGroupCommand(list(self.joint_states.position))                                       # Set initial joint commands to the current joint positions                                                           # Wait until an initial joint state message is recieved
+        self.joint_commands = JointGroupCommand("turret", list(self.joint_states.position))                             # Set initial joint commands to the current joint positions
         self.robot_info = self.srv_robot_info("group", "turret")                                                        # Call the RobotInfo Service
         self.sub_img = rospy.Subscriber("lifecam/image_raw", Image, self.image_cb)                                      # ROS Subscriber to get images from the 'usb_cam' node
 
