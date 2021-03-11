@@ -14,6 +14,13 @@ To get started, open up a terminal and type (assuming a PhantomX XL430 is being 
 ```
 roslaunch interbotix_xsturret_control xsturret_control.launch robot_model:=pxxls
 ```
+
+Note, that if you want to test out your code first on a [simulated](https://github.com/Interbotix/interbotix_ros_core/tree/main/interbotix_ros_xseries/interbotix_xs_sdk#overview) turret (best with 'Time-Based Profile' motion only), you can type...
+
+```
+roslaunch interbotix_xsturret_control xsturret_control.launch robot_model:=pxxls use_sim:=true
+```
+
 In another terminal, navigate to this directory and type...
 ```
 python turret_time_profile_control.py        # python3 turret_time_profile_control.py if using ROS Noetic

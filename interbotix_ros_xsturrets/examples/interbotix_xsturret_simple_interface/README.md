@@ -61,6 +61,7 @@ A red error message might appear in the screen saying `Couldn't open joystick fo
 | threshold | value from 0 to 1 defining joystick sensitivity; a larger number means the joystick should be less sensitive | 0.75 |
 | controller | type of Playstation controller ('ps3' or 'ps4') | ps4 |
 | launch_driver | 'true' if the *xsturret_control.launch* file should be launched - set to 'false' if you would like to run your own version of this file separately | true |
+| use_sim | if true, the Dynamixel simulator node is run; use Rviz to visualize the robot's motion; if false, the real Dynamixel driver node is run | false |
 
 After launching, a GUI should pop up similar to the one below. To become more familiar with the GUI and external joystick controls, please refer to the tutorial located [here](Turret_Control_Tutorial.pdf).
 
