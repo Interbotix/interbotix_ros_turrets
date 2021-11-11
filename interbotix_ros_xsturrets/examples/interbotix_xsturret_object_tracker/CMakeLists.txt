@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   camera_calibration
   cv_bridge
   interbotix_xsturret_control
+  interbotix_xs_msgs
   rospy
   sensor_msgs
   std_msgs
@@ -25,7 +26,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## The catkin_package macro generates cmake config files for your package
 ## Declare things to be passed to dependent projects
 catkin_package(
-  CATKIN_DEPENDS apriltag_ros camera_calibration cv_bridge interbotix_xsturret_control rospy sensor_msgs std_msgs std_srvs usb_cam
+  CATKIN_DEPENDS apriltag_ros camera_calibration cv_bridge interbotix_xsturret_control interbotix_xs_msgs rospy sensor_msgs std_msgs std_srvs usb_cam
 )
 
 #############

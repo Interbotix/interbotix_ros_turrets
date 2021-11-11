@@ -10,11 +10,11 @@ from os.path import expanduser
 
 import rospy
 from sensor_msgs.msg import JointState
-from interbotix_xs_sdk.msg import JointGroupCommand
-from interbotix_xs_sdk.srv import RegisterValues, RegisterValuesRequest
-from interbotix_xs_sdk.srv import TorqueEnable
-from interbotix_xs_sdk.srv import RobotInfo
-from interbotix_xsturret_simple_interface.msg import TurretJoy
+from interbotix_xs_msgs.msg import JointGroupCommand
+from interbotix_xs_msgs.srv import RegisterValues, RegisterValuesRequest
+from interbotix_xs_msgs.srv import TorqueEnable
+from interbotix_xs_msgs.srv import RobotInfo
+from interbotix_xs_msgs.msg import TurretJoy
 
 from python_qt_binding.QtGui import QFont
 from python_qt_binding.QtGui import QBrush

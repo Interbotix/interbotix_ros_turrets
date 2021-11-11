@@ -2,8 +2,8 @@
 
 import rospy
 from sensor_msgs.msg import JointState
-from interbotix_xs_sdk.msg import JointGroupCommand
-from interbotix_xs_sdk.srv import RobotInfo
+from interbotix_xs_msgs.msg import JointGroupCommand
+from interbotix_xs_msgs.srv import RobotInfo
 from apriltag_ros.msg import AprilTagDetectionArray
 
 ### Class that performs object tracking based on AR tags

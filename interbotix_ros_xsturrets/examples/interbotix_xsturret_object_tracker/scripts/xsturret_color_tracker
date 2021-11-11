@@ -7,8 +7,8 @@ from cv_bridge import CvBridge, CvBridgeError
 
 import rospy
 from sensor_msgs.msg import Image, JointState
-from interbotix_xs_sdk.msg import JointGroupCommand
-from interbotix_xs_sdk.srv import RobotInfo
+from interbotix_xs_msgs.msg import JointGroupCommand
+from interbotix_xs_msgs.srv import RobotInfo
 
 ### Class that performs object tracking based on color segmentation
 class ColorTracker(object):
