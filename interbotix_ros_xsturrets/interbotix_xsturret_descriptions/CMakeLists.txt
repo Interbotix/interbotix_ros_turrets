@@ -1,33 +1,21 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(interbotix_xsturret_descriptions)
 
-## Find catkin macros and libraries
-## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
-## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  joint_state_publisher
-  joint_state_publisher_gui
-  robot_state_publisher
-  roslaunch
-  rviz
-  xacro
+find_package(ament_cmake REQUIRED)
+
+install(
+  DIRECTORY
+    launch
+    meshes
+    rviz
+    urdf
+  DESTINATION
+    share/${PROJECT_NAME}/
 )
 
-###################################
-## catkin specific configuration ##
-###################################
-## The catkin_package macro generates cmake config files for your package
-## Declare things to be passed to dependent projects
-catkin_package(
-  CATKIN_DEPENDS joint_state_publisher joint_state_publisher_gui robot_state_publisher roslaunch rviz xacro
-)
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
+endif()
 
-###########
-## Build ##
-###########
-
-## Specify additional locations of header files
-## Your package locations should be listed before other locations
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
+ament_package()
