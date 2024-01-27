@@ -1,0 +1,18 @@
+/vxxms:
+  controller_manager:
+    ros__parameters:
+      update_rate: 100  # Hz
+      joint_state_broadcaster:
+        type: joint_state_broadcaster/JointStateBroadcaster
+      turret_controller:
+        type: joint_trajectory_controller/JointTrajectoryController
+  turret_controller:
+    ros__parameters:
+      joints:
+        - pan
+        - tilt
+      interface_name: position
+      command_interfaces:
+        - position
+      state_interfaces:
+        - position
