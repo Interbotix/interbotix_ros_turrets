@@ -1,20 +1,29 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(interbotix_xsturret_control)
 
-## Find catkin macros and libraries
-## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
-## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  interbotix_xs_sdk
-  interbotix_xs_modules
-  interbotix_xsturret_descriptions
+find_package(ament_cmake REQUIRED)
+
+# Install Python executables
+install(
+  PROGRAMS
+    demos/turret_mixed_profile_control.py
+    demos/turret_time_profile_control.py
+    demos/turret_velocity_profile_control.py
+  DESTINATION
+    lib/${PROJECT_NAME}
 )
 
-###################################
-## catkin specific configuration ##
-###################################
-## The catkin_package macro generates cmake config files for your package
-## Declare things to be passed to dependent projects
-catkin_package(
-  CATKIN_DEPENDS interbotix_xs_sdk interbotix_xs_modules interbotix_xsturret_descriptions
+install(
+  DIRECTORY
+    config
+    launch
+  DESTINATION
+    share/${PROJECT_NAME}/
 )
+
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_package()

@@ -3,5 +3,5 @@ groups:
     operating_mode: position
     profile_type: time
     profile_velocity: 1000
-    profile_acceleration: 500               
+    profile_acceleration: 500
     torque_enable: true
