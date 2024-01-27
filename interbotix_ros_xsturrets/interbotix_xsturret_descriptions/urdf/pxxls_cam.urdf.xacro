@@ -9,10 +9,11 @@
   <xacro:arg name="base_link_frame"           default="base_link"/>
   <xacro:arg name="use_world_frame"           default="false"/>
   <xacro:arg name="external_urdf_loc"         default=""/>
-  <xacro:arg name="load_gazebo_configs"       default="false"/>
+  <xacro:arg name="hardware_type"             default="actual"/>
 
   <xacro:property name="mesh_directory"       value="package://interbotix_xsturret_descriptions/meshes/${robot_model}_meshes"/>
   <xacro:property name="urdf_loc"             value="$(arg external_urdf_loc)"/>
+  <xacro:property name="hardware_type"        value="$(arg hardware_type)"/>
 
   <xacro:property name="pan_limit_effort"     value="3"/>
   <xacro:property name="pan_limit_lower"      value="-3.14"/>
@@ -27,10 +28,6 @@
   <material name="interbotix_black">
     <texture filename="package://interbotix_xsturret_descriptions/meshes/interbotix_black.png"/>
   </material>
-
-  <xacro:if value="$(arg load_gazebo_configs)">
-    <xacro:include filename="$(find interbotix_xsturret_gazebo)/config/interbotix_texture.gazebo"/>
-  </xacro:if>
 
   <xacro:if value="$(arg use_world_frame)">
     <link name="world"/>
@@ -49,7 +46,7 @@
         xyz="0 0 0"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/pxxls_cam_base.stl"
+          filename="${mesh_directory}/base.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="interbotix_black"/>
@@ -60,7 +57,7 @@
         xyz="0 0 0"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/pxxls_cam_base.stl"
+          filename="${mesh_directory}/base.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
@@ -102,7 +99,7 @@
         xyz="0 0 -0.0022"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/pxxls_cam_pan.stl"
+          filename="${mesh_directory}/pan.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="interbotix_black"/>
@@ -113,7 +110,7 @@
         xyz="0 0 -0.0022"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/pxxls_cam_pan.stl"
+          filename="${mesh_directory}/pan.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
@@ -155,7 +152,7 @@
         xyz="0 0 0"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/pxxls_cam_tilt.stl"
+          filename="${mesh_directory}/tilt.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="interbotix_black"/>
@@ -166,7 +163,7 @@
         xyz="0 0 0"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/pxxls_cam_tilt.stl"
+          filename="${mesh_directory}/tilt.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
@@ -216,7 +213,7 @@
         xyz="0 0 0"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/pxxls_cam_camera.stl"
+          filename="${mesh_directory}/camera.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="interbotix_black"/>
@@ -227,11 +224,18 @@
         xyz="0 0 0"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/pxxls_cam_camera.stl"
+          filename="${mesh_directory}/camera.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
+
+  <xacro:include filename="$(find interbotix_xsturret_descriptions)/urdf/control.urdf.xacro"/>
+  <xacro:include filename="$(find interbotix_xsturret_descriptions)/urdf/gazebo_configs.urdf.xacro"/>
+
+  <xacro:if value="${hardware_type == 'gz_classic'}">
+    <xacro:gazebo_configs/>
+  </xacro:if>
 
   <xacro:if value="${urdf_loc != ''}">
     <xacro:include filename="${urdf_loc}"/>

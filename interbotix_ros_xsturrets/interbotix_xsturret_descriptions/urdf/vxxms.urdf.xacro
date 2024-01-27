@@ -29,10 +29,6 @@
     <texture filename="package://interbotix_xsturret_descriptions/meshes/interbotix_black.png"/>
   </material>
 
-  <xacro:if value="${hardware_type == 'gz_classic'}">
-    <xacro:include filename="$(find interbotix_xsturret_gazebo)/config/interbotix_texture.gazebo"/>
-  </xacro:if>  <!-- hardware_type == 'gz_classic' -->
-
   <xacro:if value="$(arg use_world_frame)">
     <link name="world"/>
     <joint name="fixed" type="fixed">
@@ -50,7 +46,7 @@
         xyz="0 0 0"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/vxxms_base.stl"
+          filename="${mesh_directory}/base.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="interbotix_black"/>
@@ -61,7 +57,7 @@
         xyz="0 0 0"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/vxxms_base.stl"
+          filename="${mesh_directory}/base.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
@@ -103,7 +99,7 @@
         xyz="0 0 0"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/vxxms_pan.stl"
+          filename="${mesh_directory}/pan.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="interbotix_black"/>
@@ -114,7 +110,7 @@
         xyz="0 0 0"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/vxxms_pan.stl"
+          filename="${mesh_directory}/pan.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
@@ -156,7 +152,7 @@
         xyz="0 0 0"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/vxxms_tilt.stl"
+          filename="${mesh_directory}/tilt.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="interbotix_black"/>
@@ -167,7 +163,7 @@
         xyz="0 0 0"/>
       <geometry>
         <mesh
-          filename="${mesh_directory}/vxxms_tilt.stl"
+          filename="${mesh_directory}/tilt.stl"
           scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
@@ -199,6 +195,13 @@
 
   <link name="$(arg robot_name)/surface_link">
   </link>
+
+  <xacro:include filename="$(find interbotix_xsturret_descriptions)/urdf/control.urdf.xacro"/>
+  <xacro:include filename="$(find interbotix_xsturret_descriptions)/urdf/gazebo_configs.urdf.xacro"/>
+
+  <xacro:if value="${hardware_type == 'gz_classic'}">
+    <xacro:gazebo_configs/>
+  </xacro:if>
 
   <xacro:if value="${urdf_loc != ''}">
     <xacro:include filename="${urdf_loc}"/>

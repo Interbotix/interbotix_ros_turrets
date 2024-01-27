@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <ros2_control name="XSHardwareInterface" type="system">
+
+    <hardware>
+
+      <!-- If simulating the robot in Gazebo Classic -->
+      <xacro:if value="${hardware_type == 'gz_classic'}">
+        <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+      </xacro:if>
+
+    </hardware>
+
+    <joint name="pan">
+      <command_interface name="position">
+        <param name="min">"${pan_limit_lower}"</param>
+        <param name="max">"${pan_limit_upper}"</param>
+      </command_interface>
+      <state_interface name="position"/>
+    </joint>
+
+    <joint name="tilt">
+      <command_interface name="position">
+        <param name="min">"${tilt_limit_lower}"</param>
+        <param name="max">"${tilt_limit_upper}"</param>
+      </command_interface>
+      <state_interface name="position"/>
+    </joint>
+
+  </ros2_control>
+
+  <!-- Load the gazebo_ros2_control plugin if using Gazebo hardware -->
+  <xacro:if value="${hardware_type == 'gz_classic'}">
+    <gazebo>
+
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <ros>
+          <namespace>/$(arg robot_name)</namespace>
+        </ros>
+        <robot_param>robot_description</robot_param>
+        <robot_param_node>robot_state_publisher</robot_param_node>
+        <parameters>$(find interbotix_xsturret_sim)/config/position_controllers/${robot_model}_position_controllers.yaml</parameters>
+      </plugin>
+
+    </gazebo>
+    <xacro:include filename="$(find interbotix_common_sim)/media/materials/scripts/interbotix_texture.gazebo"/>
+  </xacro:if>
+
+</robot>

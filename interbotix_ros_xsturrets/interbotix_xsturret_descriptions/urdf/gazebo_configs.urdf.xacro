@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot name="gazebo_configs" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="gazebo_configs">
+
+    <gazebo reference="$(arg robot_name)/$(arg base_link_frame)">
+      <material>Gazebo/DarkGray</material>
+      <dampingFactor>0.01</dampingFactor>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/pan_link">
+      <material>Gazebo/DarkGray</material>
+      <dampingFactor>0.01</dampingFactor>
+      <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/tilt_link">
+      <material>Gazebo/DarkGray</material>
+      <dampingFactor>0.01</dampingFactor>
+      <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/camera_link">
+      <material>Gazebo/DarkGray</material>
+      <dampingFactor>0.01</dampingFactor>
+      <self_collide>true</self_collide>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>
